@@ -68,6 +68,7 @@ x_merge = []
 y_merge = []
 x_insert = []
 y_insert = []
+special_input_val = []
 
 for num in range(60, 80):
     data_to_avg_merge = []
@@ -78,7 +79,7 @@ for num in range(60, 80):
         data_to_avg_merge.append(time.time() - start_time)
 
     mergesort_avg = sum(data_to_avg_merge) / len(data_to_avg_merge)
-    print("MergeSort average runtime for num =", num, ": %s seconds" % mergesort_avg)
+    # print("MergeSort average runtime for num =", num, ": %s seconds" % mergesort_avg)
 
     data_to_avg_insert = []
     for i in range(50):
@@ -88,13 +89,22 @@ for num in range(60, 80):
         data_to_avg_insert.append(time.time() - start_time)
 
     insertsort_avg = sum(data_to_avg_insert) / len(data_to_avg_insert)
-    print("InsertionSort average runtime for num =", num, ": %s seconds" % insertsort_avg)
-    print("--------------------")
+    # print("InsertionSort average runtime for num =", num, ": %s seconds" % insertsort_avg)
+    # print("--------------------")
+
+    if mergesort_avg < insertsort_avg:
+        x = num
+        if len(special_input_val) == 0:
+            special_input_val.append(x)
+            print(special_input_val)
+    else:
+        pass
 
     x_merge.append(num)
     y_merge.append(mergesort_avg)
     x_insert.append(num)
     y_insert.append(insertsort_avg)
+
 
 plt.plot(x_merge, y_merge, label="merge sort")
 plt.plot(x_insert, y_insert, label="insertion sort")
