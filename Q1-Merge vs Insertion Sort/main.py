@@ -70,7 +70,7 @@ x_insert = []
 y_insert = []
 special_input_val = []
 
-for num in range(60, 80):
+for num in range(1, 100):
     data_to_avg_merge = []
     for i in range(50):
         data = random.sample(range(1, 1000000), num)
@@ -92,11 +92,9 @@ for num in range(60, 80):
     # print("InsertionSort average runtime for num =", num, ": %s seconds" % insertsort_avg)
     # print("--------------------")
 
-    if mergesort_avg < insertsort_avg:
-        x = num
-        if len(special_input_val) == 0:
-            special_input_val.append(x)
-            print(special_input_val)
+    if mergesort_avg < insertsort_avg and len(special_input_val) == 0 and num > 1:
+        special_input_val.append(num)
+        print(special_input_val)
     else:
         pass
 
