@@ -375,48 +375,42 @@ y_rbt = []                  # red-black tree y val
 ht = dict()                 # built-in python dictionary is implemented as a hash table
 x_ht = []                   # hash x-val from built-in python dictionary
 y_ht = []                   # hash y-val from built-in python dictionary
+difference = []
 
 n = 10
 while n <= 1000000:      # 10; 100; 1000; 10000; 100000; etc
-    print("length of list =", n)
+    print("# of Insertions =", n)
 
     # to determine how long it takes to insert into Red Black Tree
     start_time = time.time()
     for i in range(n):
         data = random.randint(0, 100)
         rbt.insert(i)
-    time_to_insert = time.time() - start_time
+    time_to_insert_rbt = time.time() - start_time
     x_rbt.append(n)
-    y_rbt.append(time_to_insert)
-    print("Red-Black Tree Average Insert Time =", time_to_insert)
+    y_rbt.append(time_to_insert_rbt)
+    print("Red-Black Tree Average Insert Time =", time_to_insert_rbt)
 
     # to determine how long it takes to insert into Hash Table
     start_time = time.time()
     for i in range(n):
         data = random.randint(0, 100)
         ht[i] = data
-    time_to_insert = time.time() - start_time
-    print(len(ht))
+    time_to_insert_ht = time.time() - start_time
     x_ht.append(n)
-    y_ht.append(time_to_insert)
-    print("Hash Table Average Insert Time =", time_to_insert)
+    y_ht.append(time_to_insert_ht)
+    print("Hash Table Average Insert Time =", time_to_insert_ht)
 
-
-    print("-------------------------------------------------")
+    diff = time_to_insert_rbt - time_to_insert_ht
+    print("How much faster is Hash insert than RBT insert?", diff, "seconds")
+    print("-------------------------------------------------------------------------------")
 
     n *= 10
-print(x_ht)
-print(y_ht)
-print(x_rbt)
-print(y_rbt)
-plt.scatter(x_rbt, y_rbt, label="Red-Black Tree")
-plt.scatter(y_ht, y_ht, label="Hash Table")
 
+plt.plot(x_rbt, y_rbt, label="Red-Black Tree")
+plt.plot(x_ht, y_ht, label="Hash Table")
 plt.title('Comparing Insertion Time for Red-Black Trees and Hash Tables')
-plt.xlabel('number of elements to insert')
-plt.ylabel('average runtime (seconds)')
-#plt.tight_layout()
+plt.xlabel('Number of Elements to Insert')
+plt.ylabel('Runtime (seconds)')
 plt.legend()
 plt.show()
-
-
